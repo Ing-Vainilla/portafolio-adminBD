@@ -1,0 +1,39 @@
+Table Prestamos {
+  id_prestamo integer [primary key]
+  fecha_prestamo timestamp
+  id_usuario integer
+  id_libro integer
+}
+
+Table Usuarios {
+  id_usuario integer [primary key]
+  nombre_usuario varchar
+  email_usuario varchar
+}
+
+Table Libros {
+  id_libro integer [primary key]
+  titulo_libro varchar
+  autor_libro varchar
+}
+
+Ref: Prestamos.id_usuario > Usuarios.id_usuario
+Ref: Prestamos.id_libro > Libros.id_libro
+
+Records Prestamos(id_prestamo, fecha_prestamo) {
+  0, '2026-01-01'
+  1, '2026-02-28'
+  2, '2026-03-14'
+}
+
+Records Usuarios(id_usuario, nombre_usuario, email_usuario) {
+  1, 'Larissa', 'larissa@gmail.com'
+  2, 'Mafer', 'mafer@gmail.com'
+  3, 'Rodin', 'rodin@gmail.com'
+}
+
+Records Libros(id_libro, titulo_libro, autor_libro) {
+  0, 'Katabasis', 'F. Kuang'
+  1, 'Don Quijote de la Mancha', 'Miguel de Cervantes'
+  2, 'Cien años de soledad', 'Gabriel García Márquez'
+}
