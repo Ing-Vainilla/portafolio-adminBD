@@ -1,0 +1,65 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table Cliente {
+  id_cliente interger [primary key]
+  rut_dni varchar [unique]
+  nombre varchar [not null]
+  telefono varchar
+  correo varchar
+}
+
+Table Mascota {
+  id_mascota integer [primary key]
+  nombre varchar [not null]
+  especie varchar [not null]
+  raza varchar
+  fecha_nac date
+  id_cliente fk
+}
+
+Table Veterinario {
+  id_veterinario interger [primary key]
+  rut_dni varchar [primary key, unique]
+  nombre varchar [not null]
+  especialidad varchar(100)
+  telefono varchar(20)
+}
+
+Table Consulta {
+  id_consulta integer [primary key]
+  fecha_hora datetime [not null]
+  diagnostico text
+  costo decimal [not null]
+  id_mascota fk
+  id_veterinario fk
+  id_cliente fk
+}
+
+Table Medicamento {
+  id_medicamento interger [primary key]
+  codigo interger [unique]
+  nombre varchar [not null]
+  laboratorio varchar
+  precio decimal [not null]
+}
+
+Table Prescripcion {
+  id_prescripcion integer [primary key]
+  id_consulta fk
+  id_medicamento fk
+  cantidad integer [not null]
+  indicaciones varchar [not null]
+}
+
+
+Ref: Mascota.id_cliente > Cliente.id_cliente
+
+Ref: Consulta.id_mascota > Mascota.id_mascota
+
+Ref: Consulta.id_veterinario > Veterinario.id_veterinario
+
+Ref: Prescripcion.id_consulta > Consulta.id_consulta
+
+Ref: Medicamento.id_medicamento > Prescripcion.id_medicamento
+
